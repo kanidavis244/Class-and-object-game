@@ -1,0 +1,43 @@
+#include <iostream>
+
+class Ball
+{
+  int X;
+  int Y;
+public:
+  Ball () : X(0), Y(0) {}
+  Ball (int x, int y) : X(x), Y(y) {}
+  void Step ();
+  void ShowPosition ();
+};
+
+void
+Ball::Step ()
+{
+  ++Y;
+}
+
+void
+Ball::ShowPosition ()
+{
+  std::cout << "(" << X << ", " << Y << ")" << std::endl;
+}
+
+int
+main ()
+{
+  Ball Instance[2];
+  
+  for (size_t i = 0; i < 2; ++i)
+    {
+      Instance[i].Step ();
+      /* Every other Ball instance will call Step() a second time
+	 instead of once.  */
+      if (i % 2 != 0)
+        Instance[i].Step ();
+    }
+  for (size_t i = 0; i < 2; ++i)
+    {
+      Instance[i].ShowPosition ();
+    }
+
